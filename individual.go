@@ -6,6 +6,7 @@ import "time"
 type Individual struct {
     vector []int
     fitness int
+    slice float64
 }
 
 func NewIndividual(problem [81]int) Individual {

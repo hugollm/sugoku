@@ -4,7 +4,7 @@ import "math/rand"
 
 func Crossover(parents [2]Individual, probability float64) [2]Individual {
     if rand.Float64() > probability {
-        return parents
+        return [2]Individual{CopyIndividual(parents[0]), CopyIndividual(parents[1])}
     }
     size := len(parents[0].vector)
     offspring := makeEmptyIndividuals(size)
@@ -18,7 +18,6 @@ func Crossover(parents [2]Individual, probability float64) [2]Individual {
             offspring[1].vector[i] = parents[0].vector[i]
         }
     }
-    copy(offspring[0].vector, parents[0].vector[:point])
     return offspring
 }
 

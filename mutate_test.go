@@ -7,8 +7,8 @@ func TestMutateWithMinProbability(t *testing.T) {
     problem := ReadProblem("problems/simple/problem")
     offspring := [2]Individual{NewIndividual(problem), NewIndividual(problem)}
     offspring_copy := copyOffspring(offspring)
-    mutants := Mutate(offspring, 0)
-    if ! reflect.DeepEqual(mutants[0].vector, offspring_copy[0]) || ! reflect.DeepEqual(mutants[1].vector, offspring_copy[1]) {
+    Mutate(offspring, 0)
+    if ! reflect.DeepEqual(offspring[0].vector, offspring_copy[0]) || ! reflect.DeepEqual(offspring[1].vector, offspring_copy[1]) {
         t.Fail()
     }
 }
@@ -17,8 +17,8 @@ func TestMutateWithMaxProbability(t *testing.T) {
     problem := ReadProblem("problems/simple/problem")
     offspring := [2]Individual{NewIndividual(problem), NewIndividual(problem)}
     offspring_copy := copyOffspring(offspring)
-    mutants := Mutate(offspring, 1)
-    if reflect.DeepEqual(mutants[0].vector, offspring_copy[0]) || reflect.DeepEqual(mutants[1].vector, offspring_copy[1]) {
+    Mutate(offspring, 1)
+    if reflect.DeepEqual(offspring[0].vector, offspring_copy[0]) || reflect.DeepEqual(offspring[1].vector, offspring_copy[1]) {
         t.Fail()
     }
 }

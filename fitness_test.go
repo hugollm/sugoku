@@ -12,26 +12,18 @@ func TestMakeCandidateSolution(t *testing.T) {
     }
 }
 
-func TestFitness1(t *testing.T) {
+func TestLowFitness(t *testing.T) {
     problem := ReadProblem("problems/simple/problem")
     input := []int{3, 5, 6}
-    if Fitness(problem, input) != 1 {
+    if Fitness(problem, input) != 109 {
         t.Fail()
     }
 }
 
-func TestFitness27(t *testing.T) {
+func TestFitnessHighestFitness(t *testing.T) {
     problem := ReadProblem("problems/simple/problem")
     input := VectorFromString("5639347821741598387659769244895216514828193546769")
-    if Fitness(problem, input) != 27 {
-        t.Fail()
-    }
-}
-
-func TestFitness0(t *testing.T) {
-    problem := ReadProblem("problems/simple/problem")
-    input := VectorFromString("1111111111111111111111111111111111111111111111111")
-    if Fitness(problem, input) != 0 {
+    if Fitness(problem, input) != 243 {
         t.Fail()
     }
 }

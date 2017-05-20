@@ -29,39 +29,42 @@ func makeCandidateSolution(problem [81]int, input []int) [81]int {
 }
 
 func evaluateRow(solution [81]int, row int) int {
+    fit := 0
     set := make(map[int]bool)
     for col := 0; col < 9; col++ {
         i := (row * 9) + col
-        if solution[i] == 0 || set[solution[i]] == true {
-            return 0
+        if solution[i] != 0 && set[solution[i]] == false {
+            fit++
         }
         set[solution[i]] = true
     }
-    return 1
+    return fit
 }
 
 func evaluateCol(solution [81]int, col int) int {
+    fit := 0
     set := make(map[int]bool)
     for row := 0; row < 9; row++ {
         i := (row * 9) + col
-        if solution[i] == 0 || set[solution[i]] == true {
-            return 0
+        if solution[i] != 0 && set[solution[i]] == false {
+            fit++
         }
         set[solution[i]] = true
     }
-    return 1
+    return fit
 }
 
 func evaluateBlock(solution [81]int, block int) int {
+    fit := 0
     set := make(map[int]bool)
     for row := 0; row < 3; row++ {
         for col := 0; col < 3; col++ {
             i := ((block / 3) * 27) + ((block / 3) * 3) + (row * 9) + col
-            if solution[i] == 0 || set[solution[i]] == true {
-                return 0
+            if solution[i] != 0 && set[solution[i]] == false {
+                fit++
             }
             set[solution[i]] = true
         }
     }
-    return 1
+    return fit
 }

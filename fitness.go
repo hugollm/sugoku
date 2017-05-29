@@ -1,8 +1,8 @@
 package main
 
-func Fitness(problem [81]int, input []int) int {
+func Fitness(input []int) float64 {
     solution := makeCandidateSolution(problem, input)
-    fit := 0
+    fit := 0.0
     for row := 0; row < 9; row++ {
         fit += evaluateRow(solution, row)
     }
@@ -28,7 +28,7 @@ func makeCandidateSolution(problem [81]int, input []int) [81]int {
     return solution
 }
 
-func evaluateRow(solution [81]int, row int) int {
+func evaluateRow(solution [81]int, row int) float64 {
     fit := 0
     set := make(map[int]bool)
     for col := 0; col < 9; col++ {
@@ -38,10 +38,10 @@ func evaluateRow(solution [81]int, row int) int {
         }
         set[solution[i]] = true
     }
-    return fit
+    return float64(fit)
 }
 
-func evaluateCol(solution [81]int, col int) int {
+func evaluateCol(solution [81]int, col int) float64 {
     fit := 0
     set := make(map[int]bool)
     for row := 0; row < 9; row++ {
@@ -51,10 +51,10 @@ func evaluateCol(solution [81]int, col int) int {
         }
         set[solution[i]] = true
     }
-    return fit
+    return float64(fit)
 }
 
-func evaluateBlock(solution [81]int, block int) int {
+func evaluateBlock(solution [81]int, block int) float64 {
     fit := 0
     set := make(map[int]bool)
     for row := 0; row < 3; row++ {
@@ -66,5 +66,5 @@ func evaluateBlock(solution [81]int, block int) int {
             set[solution[i]] = true
         }
     }
-    return fit
+    return float64(fit)
 }

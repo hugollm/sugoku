@@ -17,3 +17,13 @@ func ReadProblem(path string) [81]int {
     }
     return vector
 }
+
+func InputSize(problem [81]int) int {
+    size := 0
+    for _, n := range problem {
+        if n == 0 {
+            size++
+        }
+    }
+    return size
+}

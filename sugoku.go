@@ -2,51 +2,41 @@ package main
 
 import "os"
 import "fmt"
-import "math/rand"
-import "time"
+import "github.com/hugollm/exodus"
+
+var problem [81]int
 
 func main() {
-    rand.Seed(time.Now().UTC().UnixNano())
-    problem := ReadProblem(os.Args[1])
-    const populationSize int = 30
-    population := NewPopulation(problem, populationSize)
-    best := population[0]
-    for generation := 0; generation < 9999999999; generation++ {
+    problem = ReadProblem(os.Args[1])
+    search := exodus.Search{
+        IndividualSize: InputSize(problem),
+        PopulationSize: 20,
+        CrossoverRate: 0.6,
+        MutationRate: 0.005,
+        NewGene: newGene,
+        Fitness: Fitness,
+        OnGeneration: onGeneration,
+    }
+    search.Start()
+}
 
-        for i := 0; i < len(population); i++ {
-            population[i].fitness = Fitness(problem, population[i].vector)
-            if &population[i] != &best && population[i].fitness >= best.fitness {
-                best = population[i]
-            }
-        }
+func newGene() int {
+    return exodus.RandomInt(1, 9)
+}
 
-        if best.fitness == 243 {
-            printStatus(population, best)
-            break
-        }
-
-        if generation % 100 == 0 {
-            printStatus(population, best)
-        }
-
-        newPopulation := make([]Individual, populationSize)
-        for i := 0; i < (populationSize/2); i++ {
-            parents := SelectParents(population)
-            offspring := Crossover(parents, 0.6)
-            Mutate(offspring, 0.01)
-            newPopulation[i+i] = CopyIndividual(offspring[0])
-            newPopulation[i+i+1] = CopyIndividual(offspring[1])
-        }
-
-        population = newPopulation
-        population[0] = best
+func onGeneration(search *exodus.Search) {
+    if search.Best.Fitness == 243 {
+        printStatus(search)
+        search.Stop()
+    } else if search.Generation % 100 == 0 {
+        printStatus(search)
     }
 }
 
-func printStatus(population []Individual, best Individual) {
-    for _, individual := range population {
-        fmt.Printf("%03d ", individual.fitness)
+func printStatus(search *exodus.Search) {
+    for _, individual := range search.Population.Individuals {
+        fmt.Printf("%03d ", int(individual.Fitness))
     }
-    fmt.Print(best.vector, best.fitness)
+    fmt.Print(search.Best.Genome, int(search.Best.Fitness), search.Generation)
     fmt.Println()
 }

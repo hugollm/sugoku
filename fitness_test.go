@@ -4,7 +4,7 @@ import "testing"
 
 func TestMakeCandidateSolution(t *testing.T) {
     problem = ReadProblem("problems/simple/problem")
-    input := []int{3, 5, 6}
+    input := []float64{3, 5, 6}
     solution := makeCandidateSolution(problem, input)
     expected := SudokuFromString("138529674600000500020003006201040000500301008000060703900700030002000007340280105")
     if solution != expected {
@@ -14,7 +14,7 @@ func TestMakeCandidateSolution(t *testing.T) {
 
 func TestLowFitness(t *testing.T) {
     problem = ReadProblem("problems/simple/problem")
-    input := []int{3, 5, 6}
+    input := []float64{3, 5, 6}
     if Fitness(input) != 109 {
         t.Fail()
     }

@@ -1,6 +1,6 @@
 package main
 
-func Fitness(input []int) float64 {
+func Fitness(input []float64) float64 {
     solution := makeCandidateSolution(problem, input)
     fit := 0.0
     for row := 0; row < 9; row++ {
@@ -15,12 +15,12 @@ func Fitness(input []int) float64 {
     return fit
 }
 
-func makeCandidateSolution(problem [81]int, input []int) [81]int {
+func makeCandidateSolution(problem [81]int, input []float64) [81]int {
     solution := problem
     for i := 0; i < len(input); i++ {
         for j := 0; j < len(solution); j++ {
             if solution[j] == 0 {
-                solution[j] = input[i]
+                solution[j] = int(input[i])
                 break
             }
         }

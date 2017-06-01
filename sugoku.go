@@ -20,8 +20,8 @@ func main() {
     search.Start()
 }
 
-func newGene() int {
-    return exodus.RandomInt(1, 9)
+func newGene() float64 {
+    return float64(exodus.RandomInt(1, 9))
 }
 
 func onGeneration(search *exodus.Search) {

@@ -8,10 +8,10 @@ func SudokuFromString(str string) [81]int {
     return vector
 }
 
-func VectorFromString(str string) []int {
-    vector := make([]int, len(str))
+func VectorFromString(str string) []float64 {
+    vector := make([]float64, len(str))
     for i := 0; i < len(str); i++ {
-        vector[i] = int(str[i] - '0')
+        vector[i] = float64(int(str[i] - '0'))
     }
     return vector
 }

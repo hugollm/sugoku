@@ -13,6 +13,7 @@ func main() {
         PopulationSize: 20,
         CrossoverRate: 0.6,
         MutationRate: 0.005,
+        MigrationRate: 0.005,
         NewGene: newGene,
         Fitness: Fitness,
         OnGeneration: onGeneration,
@@ -28,7 +29,7 @@ func onGeneration(search *exodus.Search) {
     if search.Best.Fitness == 243 {
         printStatus(search)
         search.Stop()
-    } else if search.Generation % 100 == 0 {
+    } else if search.Generation % 1000 == 0 {
         printStatus(search)
     }
 }

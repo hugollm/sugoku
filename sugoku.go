@@ -26,10 +26,12 @@ func newGene() float64 {
 }
 
 func onGeneration(search *exodus.Search) {
-    if search.Best.Fitness == 243 {
+    if search.Best.Fitness == 243 || search.Generation == 500000 {
         printStatus(search)
         search.Stop()
-    } else if search.Generation % 1000 == 0 {
+        return
+    }
+    if search.Generation % 1000 == 0 {
         printStatus(search)
     }
 }
